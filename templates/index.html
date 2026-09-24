@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Diet Planner</title>
+</head>
+
+<body>
+
+    <h1>AI Diet Planner</h1>
+
+    <p>
+        Get a personalized calorie target and meal recommendations
+        based on your information.
+    </p>
+
+    <form method="POST">
+
+        <label>Age:</label>
+        <input type="number" name="age" required>
+        <br><br>
+
+        <label>Height (cm):</label>
+        <input type="number" name="height" required>
+        <br><br>
+
+        <label>Weight (kg):</label>
+        <input type="number" name="weight" required>
+        <br><br>
+
+        <label>Activity Level:</label>
+        <select name="activity" required>
+            <option value="1">Sedentary</option>
+            <option value="2">Lightly Active</option>
+            <option value="3">Moderately Active</option>
+            <option value="4">Very Active</option>
+        </select>
+        <br><br>
+
+        <label>Goal:</label>
+        <select name="goal" required>
+            <option value="weight_loss">Weight Loss</option>
+            <option value="maintain">Maintain Weight</option>
+            <option value="weight_gain">Weight Gain</option>
+        </select>
+        <br><br>
+
+        <label>Food Preference:</label>
+        <select name="preference" required>
+            <option value="veg">Vegetarian</option>
+            <option value="non_veg">Non-Vegetarian</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Generate Diet Plan</button>
+
+    </form>
+
+
+    {% if result %}
+
+        {% if result.error %}
+
+            <h2>{{ result.error }}</h2>
+
+        {% else %}
+
+            <hr>
+
+            <h2>Your Recommendation</h2>
+
+            <p>
+                <strong>Goal:</strong>
+                {{ result.goal }}
+            </p>
+
+            <p>
+                <strong>Food Preference:</strong>
+                {{ result.preference }}
+            </p>
+
+            <p>
+                <strong>Estimated Daily Calories:</strong>
+                {{ result.calories }} kcal
+            </p>
+
+            <h3>Meal Plan</h3>
+
+            <p>
+                <strong>Breakfast:</strong>
+                {{ result.meals.breakfast }}
+            </p>
+
+            <p>
+                <strong>Lunch:</strong>
+                {{ result.meals.lunch }}
+            </p>
+
+            <p>
+                <strong>Snack:</strong>
+                {{ result.meals.snack }}
+            </p>
+
+            <p>
+                <strong>Dinner:</strong>
+                {{ result.meals.dinner }}
+            </p>
+
+            <p>
+                <strong>Note:</strong>
+                {{ result.note }}
+            </p>
+
+        {% endif %}
+
+    {% endif %}
+
+</body>
+</html>
