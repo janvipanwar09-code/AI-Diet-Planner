@@ -1,122 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AI Diet Planner</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <h1>AI Diet Planner</h1>
+    <div class="container">
 
-    <p>
-        Get a personalized calorie target and meal recommendations
-        based on your information.
-    </p>
+        <h1>AI Diet Planner 🥗</h1>
 
-    <form method="POST">
+        <p class="subtitle">
+            Get a personalized calorie target and meal recommendations.
+        </p>
 
-        <label>Age:</label>
-        <input type="number" name="age" required>
-        <br><br>
+        <form method="POST">
 
-        <label>Height (cm):</label>
-        <input type="number" name="height" required>
-        <br><br>
+            <label for="age">Age</label>
+            <input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Enter your age"
+                required
+            >
 
-        <label>Weight (kg):</label>
-        <input type="number" name="weight" required>
-        <br><br>
+            <label for="height">Height (cm)</label>
+            <input
+                type="number"
+                id="height"
+                name="height"
+                placeholder="Enter your height"
+                required
+            >
 
-        <label>Activity Level:</label>
-        <select name="activity" required>
-            <option value="1">Sedentary</option>
-            <option value="2">Lightly Active</option>
-            <option value="3">Moderately Active</option>
-            <option value="4">Very Active</option>
-        </select>
-        <br><br>
+            <label for="weight">Weight (kg)</label>
+            <input
+                type="number"
+                id="weight"
+                name="weight"
+                placeholder="Enter your weight"
+                required
+            >
 
-        <label>Goal:</label>
-        <select name="goal" required>
-            <option value="weight_loss">Weight Loss</option>
-            <option value="maintain">Maintain Weight</option>
-            <option value="weight_gain">Weight Gain</option>
-        </select>
-        <br><br>
+            <label for="activity">Activity Level</label>
+            <select id="activity" name="activity" required>
+                <option value="">Select activity level</option>
+                <option value="1">Sedentary</option>
+                <option value="2">Lightly Active</option>
+                <option value="3">Moderately Active</option>
+                <option value="4">Very Active</option>
+            </select>
 
-        <label>Food Preference:</label>
-        <select name="preference" required>
-            <option value="veg">Vegetarian</option>
-            <option value="non_veg">Non-Vegetarian</option>
-        </select>
-        <br><br>
+            <label for="goal">Goal</label>
+            <select id="goal" name="goal" required>
+                <option value="">Select your goal</option>
+                <option value="weight_loss">Weight Loss</option>
+                <option value="maintain">Maintain Weight</option>
+                <option value="weight_gain">Weight Gain</option>
+            </select>
 
-        <button type="submit">Generate Diet Plan</button>
+            <label for="preference">Food Preference</label>
+            <select id="preference" name="preference" required>
+                <option value="">Select preference</option>
+                <option value="veg">Vegetarian</option>
+                <option value="non_veg">Non-Vegetarian</option>
+            </select>
 
-    </form>
+            <button type="submit">
+                Generate Diet Plan
+            </button>
+
+        </form>
 
 
-    {% if result %}
+        {% if result %}
 
-        {% if result.error %}
+        <div class="result">
 
-            <h2>{{ result.error }}</h2>
+            {% if result.error %}
 
-        {% else %}
+                <h2>{{ result.error }}</h2>
 
-            <hr>
+            {% else %}
 
-            <h2>Your Recommendation</h2>
+                <h2>Your Personalized Recommendation</h2>
 
-            <p>
-                <strong>Goal:</strong>
-                {{ result.goal }}
-            </p>
+                <p>
+                    <strong>Goal:</strong>
+                    {{ result.goal }}
+                </p>
 
-            <p>
-                <strong>Food Preference:</strong>
-                {{ result.preference }}
-            </p>
+                <p>
+                    <strong>Food Preference:</strong>
+                    {{ result.preference }}
+                </p>
 
-            <p>
-                <strong>Estimated Daily Calories:</strong>
-                {{ result.calories }} kcal
-            </p>
+                <p>
+                    <strong>Estimated Daily Calories:</strong>
+                    {{ result.calories }} kcal
+                </p>
 
-            <h3>Meal Plan</h3>
+                <h3>🍽️ Recommended Meal Plan</h3>
 
-            <p>
-                <strong>Breakfast:</strong>
-                {{ result.meals.breakfast }}
-            </p>
+                <div class="meal">
+                    <strong>Breakfast</strong>
+                    <p>{{ result.meals.breakfast }}</p>
+                </div>
 
-            <p>
-                <strong>Lunch:</strong>
-                {{ result.meals.lunch }}
-            </p>
+                <div class="meal">
+                    <strong>Lunch</strong>
+                    <p>{{ result.meals.lunch }}</p>
+                </div>
 
-            <p>
-                <strong>Snack:</strong>
-                {{ result.meals.snack }}
-            </p>
+                <div class="meal">
+                    <strong>Snack</strong>
+                    <p>{{ result.meals.snack }}</p>
+                </div>
 
-            <p>
-                <strong>Dinner:</strong>
-                {{ result.meals.dinner }}
-            </p>
+                <div class="meal">
+                    <strong>Dinner</strong>
+                    <p>{{ result.meals.dinner }}</p>
+                </div>
 
-            <p>
-                <strong>Note:</strong>
-                {{ result.note }}
-            </p>
+                <p>
+                    <strong>Note:</strong>
+                    {{ result.note }}
+                </p>
+
+            {% endif %}
+
+        </div>
 
         {% endif %}
 
-    {% endif %}
+    </div>
 
 </body>
 </html>
