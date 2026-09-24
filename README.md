@@ -1,5 +1,5 @@
 # 🥗 AI Diet Planner
-[AI Diet Planner Screenshot](screenshot.png)
+![AI Diet Planner Screenshot](screenshot.png)
 
 An AI-based web application that provides personalized calorie recommendations and meal plans based on user information and fitness goals.
 
